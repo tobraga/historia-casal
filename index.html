@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucas & Sofia - Nossa Jornada</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: #fff8f5;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-bottom: 100px;
+    }
+    h1, h2, h3 {
+      color: #8e3b46;
+      margin-top: 30px;
+    }
+    .cronometro-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+    .polaroid {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 90%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .polaroid-img {
+      object-fit: contain;
+      max-height: 400px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #444;
+      font-style: italic;
+    }
+    .music-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: left;
+    }
+    .music-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <h1>Lucas & Sofia</h1>
+  <h2>Nossa Jornada 💞</h2>
+
+  <div class="container my-4" id="cronometros"></div>
+
+  <section class="container my-5">
+    <h3><i class="bi bi-music-note-beamed"></i> Nossas Músicas</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+      <div class="col">
+        <div class="music-card">
+          <img src="https://picsum.photos/id/1011/400/300" alt="Nosso Caminho">
+          <h5 class="mt-2">Nosso Caminho</h5>
+          <p class="text-muted">Léo & Clara</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="music-card">
+          <img src="https://picsum.photos/id/1012/400/300" alt="Sol de Primavera">
+          <h5 class="mt-2">Sol de Primavera</h5>
+          <p class="text-muted">Banda Horizonte</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="music-card">
+          <img src="https://picsum.photos/id/1013/400/300" alt="Entre Céu e Mar">
+          <h5 class="mt-2">Entre Céu e Mar</h5>
+          <p class="text-muted">João Ribeiro</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mt-5">
+    <h3><i class="bi bi-camera"></i> Momentos Marcantes 📸</h3>
+    <div id="carouselFotos" class="carousel slide mt-4" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="polaroid mx-auto">
+            <img src="https://picsum.photos/id/237/800/500" class="img-fluid polaroid-img" alt="Encontro">
+            <div class="caption">Primeiro Encontro - 14/02/2017</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="polaroid mx-auto">
+            <img src="https://picsum.photos/id/238/800/500" class="img-fluid polaroid-img" alt="Viagem">
+            <div class="caption">Primeira Viagem - 05/01/2018</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="polaroid mx-auto">
+            <img src="https://picsum.photos/id/239/800/500" class="img-fluid polaroid-img" alt="Casamento">
+            <div class="caption">Casamento - 12/09/2022</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselFotos" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselFotos" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <footer class="mt-5">
+    <p>Com carinho, Lucas & Sofia 💌</p>
+  </footer>
+
+  <script>
+    const datas = {
+      "Primeiro encontro": "2017-02-14T00:00:00",
+      "Pedido de namoro": "2017-03-10T00:00:00",
+      "Primeira viagem juntos": "2018-01-05T00:00:00",
+      "Noivado": "2020-06-18T00:00:00",
+      "Casamento": "2022-09-12T00:00:00"
+    };
+
+    function atualizarCronometros() {
+      const container = document.getElementById("cronometros");
+      container.innerHTML = "";
+
+      for (const [evento, dataStr] of Object.entries(datas)) {
+        const inicio = new Date(dataStr);
+        const agora = new Date();
+        const diff = agora - inicio;
+
+        const segundosTotais = Math.floor(diff / 1000);
+        const anos = Math.floor(segundosTotais / (365.25 * 24 * 3600));
+        const meses = Math.floor((segundosTotais % (365.25 * 24 * 3600)) / (30.44 * 24 * 3600));
+        const dias = Math.floor((segundosTotais % (30.44 * 24 * 3600)) / (24 * 3600));
+        const horas = Math.floor((segundosTotais % (24 * 3600)) / 3600);
+        const minutos = Math.floor((segundosTotais % 3600) / 60);
+        const segundos = segundosTotais % 60;
+
+        const card = document.createElement("div");
+        card.className = "cronometro-card";
+        card.innerHTML = `
+          <h5><i class="bi bi-clock-history"></i> ${evento}</h5>
+          <p>${inicio.toLocaleDateString("pt-BR")}:</p>
+          <p><strong>${anos} anos, ${meses} meses, ${dias} dias, ${horas}h ${minutos}m ${segundos}s</strong></p>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    setInterval(atualizarCronometros, 1000);
+    atualizarCronometros();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
